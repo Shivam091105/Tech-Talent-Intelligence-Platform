@@ -48,7 +48,8 @@ CREATE TABLE experience_levels (
 CREATE TABLE skills (
     skill_id       SERIAL PRIMARY KEY,
     skill_name     VARCHAR(100) NOT NULL UNIQUE,
-    skill_category VARCHAR(50) NOT NULL       -- language, framework, cloud, database, tool, soft_skill
+    skill_category VARCHAR(50) NOT NULL,       -- language, frontend, backend, ai_ml, database, devops, etc.
+    skill_domain   VARCHAR(50)                 -- sub-specialization: gen_ai, data_science, fullstack, mobile, etc.
 );
 
 -- ---------------------------------------------------------------------------

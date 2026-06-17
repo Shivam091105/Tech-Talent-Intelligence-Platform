@@ -126,12 +126,12 @@ def render():
             st.markdown("---")
 
             # -----------------------------------------------------------
-            # Salary Prediction
+            # Salary Prediction & Model Evaluation
             # -----------------------------------------------------------
-            section_header("Salary Estimate")
+            section_header("Salary Estimate & Model Performance")
 
             try:
-                from ml.salary_predictor import predict_salary
+                from ml.salary_predictor import predict_salary, get_model_metrics
 
                 prediction = predict_salary(
                     skills=user_skills,
@@ -147,7 +147,23 @@ def render():
                 with col3:
                     st.metric("High Estimate", f"${prediction['salary_high']:,.0f}")
 
-                st.caption(f"Confidence: {prediction['confidence']}  |  Random Forest model trained on market data")
+                # Display CV Metrics
+                metrics = get_model_metrics()
+                if metrics and "cv_r2_scores" in metrics:
+                    st.markdown("<br>", unsafe_allow_html=True)
+                    st.markdown("#### Model Validation (5-Fold CV)")
+                    
+                    cv_table_html = "<table class='cv-table'>"
+                    cv_table_html += "<tr><th>Fold</th><th>R² Score</th><th>MAE</th><th>RMSE</th></tr>"
+                    for i in range(metrics["cv_folds"]):
+                        cv_table_html += f"<tr><td>Fold {i+1}</td><td>{metrics['cv_r2_scores'][i]:.4f}</td><td>${metrics['cv_mae_scores'][i]:,.2f}</td><td>${metrics['cv_rmse_scores'][i]:,.2f}</td></tr>"
+                    cv_table_html += f"<tr><td><strong>Mean</strong></td><td><strong>{metrics['cv_r2_mean']:.4f} ± {metrics['cv_r2_std']:.4f}</strong></td><td><strong>${metrics['cv_mae_mean']:,.2f}</strong></td><td><strong>${metrics['cv_rmse_mean']:,.2f}</strong></td></tr>"
+                    cv_table_html += "</table>"
+                    
+                    st.markdown(cv_table_html, unsafe_allow_html=True)
+                    st.caption(f"Random Forest Regressor • Confidence: {prediction['confidence']} • Overfit Gap: {metrics.get('overfit_gap', 'N/A')}")
+                else:
+                    st.caption(f"Confidence: {prediction['confidence']}  |  Random Forest model trained on market data")
 
             except FileNotFoundError:
                 st.info("Salary prediction model not trained yet. Run `python scripts/train_model.py` to enable.")

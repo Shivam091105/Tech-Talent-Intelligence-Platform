@@ -22,6 +22,11 @@ def get_skills_by_category(country=None, source_dataset=None) -> pd.DataFrame:
     return queries.get_skills_by_category(country=country, source_dataset=source_dataset)
 
 
+def get_skills_by_domain(country=None, source_dataset=None) -> pd.DataFrame:
+    """Get skill counts grouped by domain for deeper treemap."""
+    return queries.get_skills_by_domain(country=country, source_dataset=source_dataset)
+
+
 def get_skill_cooccurrence_matrix(top_n: int = 15, country=None, source_dataset=None) -> pd.DataFrame:
     """
     Build a co-occurrence matrix for the top N skills.

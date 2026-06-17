@@ -163,7 +163,7 @@ def get_top_skills(limit: int = 20, country=None, source_dataset=None):
     join_loc = "JOIN locations l ON j.location_id = l.location_id" if country else ""
     params["limit"] = limit
     query = f"""
-        SELECT sk.skill_name, sk.skill_category,
+        SELECT sk.skill_name, sk.skill_category, sk.skill_domain,
                COUNT(DISTINCT js.job_id) AS job_count,
                ROUND(AVG(sal.avg_salary_usd)::numeric, 2) AS avg_salary
         FROM skills sk
@@ -172,7 +172,7 @@ def get_top_skills(limit: int = 20, country=None, source_dataset=None):
         LEFT JOIN salaries sal ON j.job_id = sal.job_id
         {join_loc}
         {where}
-        GROUP BY sk.skill_name, sk.skill_category
+        GROUP BY sk.skill_name, sk.skill_category, sk.skill_domain
         ORDER BY job_count DESC
         LIMIT :limit
     """
@@ -194,6 +194,27 @@ def get_skills_by_category(country=None, source_dataset=None):
         GROUP BY sk.skill_category, sk.skill_name
         ORDER BY sk.skill_category, job_count DESC
     """
+    return execute_query_df(query, params)
+
+
+def get_skills_by_domain(country=None, source_dataset=None):
+    """Skill counts grouped by domain for deeper taxonomy treemap."""
+    where, params = _build_filters(country, source_dataset)
+    join_loc = "JOIN locations l ON j.location_id = l.location_id" if country else ""
+    query = f"""
+        SELECT sk.skill_domain, sk.skill_category, sk.skill_name,
+               COUNT(DISTINCT js.job_id) AS job_count
+        FROM skills sk
+        JOIN job_skills js ON sk.skill_id = js.skill_id
+        JOIN jobs j ON js.job_id = j.job_id
+        {join_loc}
+        {where}
+        WHERE sk.skill_domain IS NOT NULL
+        GROUP BY sk.skill_domain, sk.skill_category, sk.skill_name
+        ORDER BY sk.skill_domain, job_count DESC
+    """
+    # Fix double WHERE
+    query = query.replace("WHERE\n        WHERE", "WHERE").replace("WHERE sk.skill_domain", "AND sk.skill_domain" if (country or source_dataset) else "WHERE sk.skill_domain")
     return execute_query_df(query, params)
 
 

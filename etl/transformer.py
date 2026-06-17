@@ -66,7 +66,7 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     df = df.drop_duplicates(subset=["job_title", "company_name", "location"], keep="first")
 
     removed = initial_count - len(df)
-    logger.info("Cleaning: %d rows → %d rows (%d removed)", initial_count, len(df), removed)
+    logger.info("Cleaning: %d rows -> %d rows (%d removed)", initial_count, len(df), removed)
     return df.reset_index(drop=True)
 
 

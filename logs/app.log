@@ -254,3 +254,228 @@
 2026-06-17 18:18:21 | INFO     | ml.salary_predictor |   has_kubernetes            : 0.0165
 2026-06-17 18:18:21 | INFO     | ml.salary_predictor | Model saved to C:\Users\ADMIN\OneDrive\Desktop\Sem-VI\Tech Telent Intelligence Platform\ml\models\salary_model.joblib
 2026-06-17 18:18:32 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-17 18:26:51 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-17 18:27:47 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-17 20:52:07 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 20:52:07 | INFO     | etl.pipeline |   TECH TALENT INTELLIGENCE PLATFORM — ETL PIPELINE
+2026-06-17 20:52:07 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 20:52:07 | INFO     | etl.pipeline | 
+[1/4] EXTRACTING data from CSV files...
+2026-06-17 20:52:07 | INFO     | etl.extractor | Found 3 CSV file(s) in C:\Users\ADMIN\OneDrive\Desktop\Sem-VI\Tech Telent Intelligence Platform\data\raw
+2026-06-17 20:52:07 | INFO     | etl.extractor | Read Global AI Jobs: 15000 rows, columns: ['job_id', 'job_title', 'salary_usd', 'salary_currency', 'experience_level', 'employment_type', 'company_location', 'company_size', 'employee_residence', 'remote_ratio', 'required_skills', 'education_required', 'years_experience', 'industry', 'posting_date', 'application_deadline', 'job_description_length', 'benefits_score', 'company_name']
+2026-06-17 20:52:07 | INFO     | etl.extractor |   [OK] global_ai_jobs.csv: 15000 rows extracted
+2026-06-17 20:52:07 | INFO     | etl.extractor | Read India Tech Jobs: 5000 rows, columns: ['Job_ID', 'Job_Title', 'Company', 'Company_Type', 'Industry', 'City', 'Location_Tier', 'Experience_Level', 'Job_Type', 'Work_Mode', 'Salary_LPA', 'Skills_Required', 'Education_Required', 'Openings', 'Applicants', 'Company_Rating', 'Date_Posted']
+2026-06-17 20:52:07 | INFO     | etl.extractor |   [OK] india_tech_jobs.csv: 5000 rows extracted
+2026-06-17 20:52:07 | WARNING  | etl.extractor | Unknown dataset format: se_salaries.csv — skipping
+2026-06-17 20:52:07 | INFO     | etl.extractor | Combined dataset: 20000 total rows
+2026-06-17 20:52:07 | INFO     | etl.pipeline | 
+[2/4] TRANSFORMING data...
+2026-06-17 20:52:07 | INFO     | etl.transformer | ============================================================
+2026-06-17 20:52:07 | INFO     | etl.transformer | Starting transformation pipeline (20000 rows)
+2026-06-17 20:52:07 | INFO     | etl.transformer | ============================================================
+2026-06-17 20:52:07 | INFO     | etl.transformer | Cleaning: 20000 rows → 9568 rows (10432 removed)
+2026-06-17 20:52:08 | INFO     | etl.transformer | Salary normalization: 9560 valid salary values (out of 9568)
+2026-06-17 20:52:09 | INFO     | etl.transformer | Skill extraction: 35796 total skill matches (avg 3.7 per job)
+2026-06-17 20:52:09 | INFO     | etl.transformer | Location standardization: 37 unique cities, 4 unique countries
+2026-06-17 20:52:09 | INFO     | etl.transformer | Experience categorization: {'Entry': 3101, 'Mid': 2537, 'Senior': 2073, 'Lead': 1857}
+2026-06-17 20:52:09 | INFO     | etl.transformer | ============================================================
+2026-06-17 20:52:09 | INFO     | etl.transformer | Transformation complete: 9568 rows
+2026-06-17 20:52:09 | INFO     | etl.transformer | ============================================================
+2026-06-17 20:52:09 | INFO     | etl.pipeline | 
+[3/4] VALIDATING records...
+2026-06-17 20:52:09 | INFO     | etl.validators | Validation: 9568 valid, 0 errors (out of 9568)
+2026-06-17 20:52:09 | INFO     | etl.pipeline | 
+[4/4] LOADING into PostgreSQL...
+2026-06-17 20:52:09 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-17 20:52:09 | INFO     | etl.loader | Loaded 4 experience levels from database
+2026-06-17 20:52:35 | INFO     | setup_database | ============================================================
+2026-06-17 20:52:35 | INFO     | setup_database | Tech Talent Intelligence Platform — Database Setup
+2026-06-17 20:52:35 | INFO     | setup_database | ============================================================
+2026-06-17 20:52:35 | INFO     | setup_database | Step 1: Ensuring database 'tech_talent_db' exists...
+2026-06-17 20:52:35 | INFO     | setup_database | Database already exists: tech_talent_db
+2026-06-17 20:52:35 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-17 20:52:35 | INFO     | database | Database connection test: SUCCESS
+2026-06-17 20:52:35 | INFO     | setup_database | Step 2: Applying schema (6799 bytes)...
+2026-06-17 20:52:35 | INFO     | setup_database | Schema applied successfully!
+2026-06-17 20:52:35 | INFO     | setup_database | Step 3: Verifying tables...
+2026-06-17 20:52:35 | INFO     | setup_database | Tables in database:
+2026-06-17 20:52:35 | INFO     | setup_database |   [OK] companies
+2026-06-17 20:52:35 | INFO     | setup_database |   [OK] experience_levels
+2026-06-17 20:52:35 | INFO     | setup_database |   [OK] job_skills
+2026-06-17 20:52:35 | INFO     | setup_database |   [OK] jobs
+2026-06-17 20:52:35 | INFO     | setup_database |   [OK] locations
+2026-06-17 20:52:35 | INFO     | setup_database |   [OK] salaries
+2026-06-17 20:52:35 | INFO     | setup_database |   [OK] skills
+2026-06-17 20:52:35 | INFO     | setup_database | Views in database:
+2026-06-17 20:52:35 | INFO     | setup_database |   [OK] v_experience_summary
+2026-06-17 20:52:35 | INFO     | setup_database |   [OK] v_location_hiring
+2026-06-17 20:52:35 | INFO     | setup_database |   [OK] v_skill_demand
+2026-06-17 20:52:35 | INFO     | setup_database | ============================================================
+2026-06-17 20:52:35 | INFO     | setup_database | Database setup complete!
+2026-06-17 20:52:35 | INFO     | setup_database | ============================================================
+2026-06-17 20:52:50 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 20:52:50 | INFO     | etl.pipeline |   TECH TALENT INTELLIGENCE PLATFORM — ETL PIPELINE
+2026-06-17 20:52:50 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 20:52:50 | INFO     | etl.pipeline | 
+[1/4] EXTRACTING data from CSV files...
+2026-06-17 20:52:50 | INFO     | etl.extractor | Found 3 CSV file(s) in C:\Users\ADMIN\OneDrive\Desktop\Sem-VI\Tech Telent Intelligence Platform\data\raw
+2026-06-17 20:52:50 | INFO     | etl.extractor | Read Global AI Jobs: 15000 rows, columns: ['job_id', 'job_title', 'salary_usd', 'salary_currency', 'experience_level', 'employment_type', 'company_location', 'company_size', 'employee_residence', 'remote_ratio', 'required_skills', 'education_required', 'years_experience', 'industry', 'posting_date', 'application_deadline', 'job_description_length', 'benefits_score', 'company_name']
+2026-06-17 20:52:50 | INFO     | etl.extractor |   [OK] global_ai_jobs.csv: 15000 rows extracted
+2026-06-17 20:52:50 | INFO     | etl.extractor | Read India Tech Jobs: 5000 rows, columns: ['Job_ID', 'Job_Title', 'Company', 'Company_Type', 'Industry', 'City', 'Location_Tier', 'Experience_Level', 'Job_Type', 'Work_Mode', 'Salary_LPA', 'Skills_Required', 'Education_Required', 'Openings', 'Applicants', 'Company_Rating', 'Date_Posted']
+2026-06-17 20:52:50 | INFO     | etl.extractor |   [OK] india_tech_jobs.csv: 5000 rows extracted
+2026-06-17 20:52:50 | WARNING  | etl.extractor | Unknown dataset format: se_salaries.csv — skipping
+2026-06-17 20:52:50 | INFO     | etl.extractor | Combined dataset: 20000 total rows
+2026-06-17 20:52:50 | INFO     | etl.pipeline | 
+[2/4] TRANSFORMING data...
+2026-06-17 20:52:50 | INFO     | etl.transformer | ============================================================
+2026-06-17 20:52:50 | INFO     | etl.transformer | Starting transformation pipeline (20000 rows)
+2026-06-17 20:52:50 | INFO     | etl.transformer | ============================================================
+2026-06-17 20:52:50 | INFO     | etl.transformer | Cleaning: 20000 rows -> 9568 rows (10432 removed)
+2026-06-17 20:52:50 | INFO     | etl.transformer | Salary normalization: 9560 valid salary values (out of 9568)
+2026-06-17 20:52:51 | INFO     | etl.transformer | Skill extraction: 35796 total skill matches (avg 3.7 per job)
+2026-06-17 20:52:51 | INFO     | etl.transformer | Location standardization: 37 unique cities, 4 unique countries
+2026-06-17 20:52:51 | INFO     | etl.transformer | Experience categorization: {'Entry': 3101, 'Mid': 2537, 'Senior': 2073, 'Lead': 1857}
+2026-06-17 20:52:51 | INFO     | etl.transformer | ============================================================
+2026-06-17 20:52:51 | INFO     | etl.transformer | Transformation complete: 9568 rows
+2026-06-17 20:52:51 | INFO     | etl.transformer | ============================================================
+2026-06-17 20:52:51 | INFO     | etl.pipeline | 
+[3/4] VALIDATING records...
+2026-06-17 20:52:52 | INFO     | etl.validators | Validation: 9568 valid, 0 errors (out of 9568)
+2026-06-17 20:52:52 | INFO     | etl.pipeline | 
+[4/4] LOADING into PostgreSQL...
+2026-06-17 20:52:52 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-17 20:52:52 | INFO     | etl.loader | Loaded 4 experience levels from database
+2026-06-17 20:52:52 | INFO     | etl.loader | Loaded 146 skills into database
+2026-06-17 20:53:23 | INFO     | etl.loader | ============================================================
+2026-06-17 20:53:23 | INFO     | etl.loader | Database loading complete:
+2026-06-17 20:53:23 | INFO     | etl.loader |   companies       : 69 records
+2026-06-17 20:53:23 | INFO     | etl.loader |   locations       : 37 records
+2026-06-17 20:53:23 | INFO     | etl.loader |   skills          : 146 records
+2026-06-17 20:53:23 | INFO     | etl.loader |   jobs            : 9568 records
+2026-06-17 20:53:23 | INFO     | etl.loader |   salaries        : 9560 records
+2026-06-17 20:53:23 | INFO     | etl.loader |   job_skills      : 35796 records
+2026-06-17 20:53:23 | INFO     | etl.loader | ============================================================
+2026-06-17 20:53:23 | INFO     | etl.pipeline | 
+2026-06-17 20:53:23 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 20:53:23 | INFO     | etl.pipeline |   ETL PIPELINE SUMMARY
+2026-06-17 20:53:23 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 20:53:23 | INFO     | etl.pipeline |   Records extracted:    20000
+2026-06-17 20:53:23 | INFO     | etl.pipeline |   After transformation: 9568
+2026-06-17 20:53:23 | INFO     | etl.pipeline |   Valid records:        9568
+2026-06-17 20:53:23 | INFO     | etl.pipeline |   Jobs loaded:          9568
+2026-06-17 20:53:23 | INFO     | etl.pipeline |   Salaries loaded:      9560
+2026-06-17 20:53:23 | INFO     | etl.pipeline |   Job-skill links:      35796
+2026-06-17 20:53:23 | INFO     | etl.pipeline |   Duration:             33.05 seconds
+2026-06-17 20:53:23 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 20:53:42 | INFO     | ml.salary_predictor | ============================================================
+2026-06-17 20:53:42 | INFO     | ml.salary_predictor | Training Salary Prediction Model
+2026-06-17 20:53:42 | INFO     | ml.salary_predictor | ============================================================
+2026-06-17 20:53:42 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-17 20:53:43 | INFO     | ml.salary_predictor | Prepared 9560 samples with 25 features
+2026-06-17 20:53:43 | INFO     | ml.salary_predictor | Train: 7648 samples, Test: 1912 samples
+2026-06-17 20:53:43 | INFO     | ml.salary_predictor | Model trained successfully
+2026-06-17 20:53:43 | INFO     | ml.salary_predictor | Running 5-fold cross-validation...
+2026-06-17 20:53:44 | INFO     | ml.salary_predictor | Hold-out Test Results:
+2026-06-17 20:53:44 | INFO     | ml.salary_predictor |   MAE:     $23492.13
+2026-06-17 20:53:44 | INFO     | ml.salary_predictor |   RMSE:    $34595.59
+2026-06-17 20:53:44 | INFO     | ml.salary_predictor |   R2:      0.7204
+2026-06-17 20:53:44 | INFO     | ml.salary_predictor | 5-Fold Cross-Validation Results:
+2026-06-17 20:53:44 | INFO     | ml.salary_predictor |   Fold 1: R2=0.7227  MAE=$23425.21  RMSE=$34450.70
+2026-06-17 20:53:44 | INFO     | ml.salary_predictor |   Fold 2: R2=0.7189  MAE=$24107.86  RMSE=$36809.47
+2026-06-17 20:53:44 | INFO     | ml.salary_predictor |   Fold 3: R2=0.7053  MAE=$24103.51  RMSE=$35992.89
+2026-06-17 20:53:44 | INFO     | ml.salary_predictor |   Fold 4: R2=0.7296  MAE=$23164.20  RMSE=$33997.00
+2026-06-17 20:53:44 | INFO     | ml.salary_predictor |   Fold 5: R2=0.7140  MAE=$24014.91  RMSE=$35403.29
+2026-06-17 20:53:44 | INFO     | ml.salary_predictor |   Mean R2:   0.7181 +/- 0.0082
+2026-06-17 20:53:44 | INFO     | ml.salary_predictor |   Mean MAE:  $23763.14
+2026-06-17 20:53:44 | INFO     | ml.salary_predictor |   Mean RMSE: $35330.67
+2026-06-17 20:53:44 | INFO     | ml.salary_predictor |   Train R2:  0.7876 (overfit gap: 0.0695)
+2026-06-17 20:53:44 | INFO     | ml.salary_predictor | Top 5 features:
+2026-06-17 20:53:44 | INFO     | ml.salary_predictor |   experience_level          : 0.5999
+2026-06-17 20:53:44 | INFO     | ml.salary_predictor |   is_india                  : 0.2526
+2026-06-17 20:53:44 | INFO     | ml.salary_predictor |   skill_count               : 0.0317
+2026-06-17 20:53:44 | INFO     | ml.salary_predictor |   work_mode                 : 0.0291
+2026-06-17 20:53:44 | INFO     | ml.salary_predictor |   has_javascript            : 0.0169
+2026-06-17 20:53:44 | INFO     | ml.salary_predictor | Model saved to C:\Users\ADMIN\OneDrive\Desktop\Sem-VI\Tech Telent Intelligence Platform\ml\models\salary_model.joblib
+2026-06-17 20:55:00 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 20:55:00 | INFO     | etl.pipeline |   TECH TALENT INTELLIGENCE PLATFORM — ETL PIPELINE
+2026-06-17 20:55:00 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 20:55:00 | INFO     | etl.pipeline | 
+[1/4] EXTRACTING data from CSV files...
+2026-06-17 20:55:00 | INFO     | etl.extractor | Found 3 CSV file(s) in C:\Users\ADMIN\OneDrive\Desktop\Sem-VI\Tech Telent Intelligence Platform\data\raw
+2026-06-17 20:55:00 | INFO     | etl.extractor | Read Global AI Jobs: 15000 rows, columns: ['job_id', 'job_title', 'salary_usd', 'salary_currency', 'experience_level', 'employment_type', 'company_location', 'company_size', 'employee_residence', 'remote_ratio', 'required_skills', 'education_required', 'years_experience', 'industry', 'posting_date', 'application_deadline', 'job_description_length', 'benefits_score', 'company_name']
+2026-06-17 20:55:00 | INFO     | etl.extractor |   [OK] global_ai_jobs.csv: 15000 rows extracted
+2026-06-17 20:55:00 | INFO     | etl.extractor | Read India Tech Jobs: 5000 rows, columns: ['Job_ID', 'Job_Title', 'Company', 'Company_Type', 'Industry', 'City', 'Location_Tier', 'Experience_Level', 'Job_Type', 'Work_Mode', 'Salary_LPA', 'Skills_Required', 'Education_Required', 'Openings', 'Applicants', 'Company_Rating', 'Date_Posted']
+2026-06-17 20:55:00 | INFO     | etl.extractor |   [OK] india_tech_jobs.csv: 5000 rows extracted
+2026-06-17 20:55:00 | WARNING  | etl.extractor | Unknown dataset format: se_salaries.csv — skipping
+2026-06-17 20:55:00 | INFO     | etl.extractor | Combined dataset: 20000 total rows
+2026-06-17 20:55:00 | INFO     | etl.pipeline | 
+[2/4] TRANSFORMING data...
+2026-06-17 20:55:00 | INFO     | etl.transformer | ============================================================
+2026-06-17 20:55:00 | INFO     | etl.transformer | Starting transformation pipeline (20000 rows)
+2026-06-17 20:55:00 | INFO     | etl.transformer | ============================================================
+2026-06-17 20:55:00 | INFO     | etl.transformer | Cleaning: 20000 rows -> 9568 rows (10432 removed)
+2026-06-17 20:55:00 | INFO     | etl.transformer | Salary normalization: 9560 valid salary values (out of 9568)
+2026-06-17 20:55:01 | INFO     | etl.transformer | Skill extraction: 35796 total skill matches (avg 3.7 per job)
+2026-06-17 20:55:01 | INFO     | etl.transformer | Location standardization: 37 unique cities, 4 unique countries
+2026-06-17 20:55:01 | INFO     | etl.transformer | Experience categorization: {'Entry': 3101, 'Mid': 2537, 'Senior': 2073, 'Lead': 1857}
+2026-06-17 20:55:01 | INFO     | etl.transformer | ============================================================
+2026-06-17 20:55:01 | INFO     | etl.transformer | Transformation complete: 9568 rows
+2026-06-17 20:55:01 | INFO     | etl.transformer | ============================================================
+2026-06-17 20:55:01 | INFO     | etl.pipeline | 
+[3/4] VALIDATING records...
+2026-06-17 20:55:02 | INFO     | etl.validators | Validation: 9568 valid, 0 errors (out of 9568)
+2026-06-17 20:55:02 | INFO     | etl.pipeline | 
+[4/4] LOADING into PostgreSQL...
+2026-06-17 20:55:02 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-17 20:55:02 | INFO     | etl.loader | Loaded 4 experience levels from database
+2026-06-17 20:55:02 | INFO     | etl.loader | Loaded 146 skills into database
+2026-06-17 20:55:27 | INFO     | etl.loader | ============================================================
+2026-06-17 20:55:27 | INFO     | etl.loader | Database loading complete:
+2026-06-17 20:55:27 | INFO     | etl.loader |   companies       : 69 records
+2026-06-17 20:55:27 | INFO     | etl.loader |   locations       : 37 records
+2026-06-17 20:55:27 | INFO     | etl.loader |   skills          : 146 records
+2026-06-17 20:55:27 | INFO     | etl.loader |   jobs            : 9568 records
+2026-06-17 20:55:27 | INFO     | etl.loader |   salaries        : 9560 records
+2026-06-17 20:55:27 | INFO     | etl.loader |   job_skills      : 35796 records
+2026-06-17 20:55:27 | INFO     | etl.loader | ============================================================
+2026-06-17 20:55:27 | INFO     | etl.pipeline | 
+2026-06-17 20:55:27 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 20:55:27 | INFO     | etl.pipeline |   ETL PIPELINE SUMMARY
+2026-06-17 20:55:27 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 20:55:27 | INFO     | etl.pipeline |   Records extracted:    20000
+2026-06-17 20:55:27 | INFO     | etl.pipeline |   After transformation: 9568
+2026-06-17 20:55:27 | INFO     | etl.pipeline |   Valid records:        9568
+2026-06-17 20:55:27 | INFO     | etl.pipeline |   Jobs loaded:          9568
+2026-06-17 20:55:27 | INFO     | etl.pipeline |   Salaries loaded:      9560
+2026-06-17 20:55:27 | INFO     | etl.pipeline |   Job-skill links:      35796
+2026-06-17 20:55:27 | INFO     | etl.pipeline |   Duration:             27.03 seconds
+2026-06-17 20:55:27 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 20:55:36 | INFO     | ml.salary_predictor | ============================================================
+2026-06-17 20:55:36 | INFO     | ml.salary_predictor | Training Salary Prediction Model
+2026-06-17 20:55:36 | INFO     | ml.salary_predictor | ============================================================
+2026-06-17 20:55:36 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-17 20:55:36 | INFO     | ml.salary_predictor | Prepared 19120 samples with 25 features
+2026-06-17 20:55:36 | INFO     | ml.salary_predictor | Train: 15296 samples, Test: 3824 samples
+2026-06-17 20:55:36 | INFO     | ml.salary_predictor | Model trained successfully
+2026-06-17 20:55:36 | INFO     | ml.salary_predictor | Running 5-fold cross-validation...
+2026-06-17 20:55:38 | INFO     | ml.salary_predictor | Hold-out Test Results:
+2026-06-17 20:55:38 | INFO     | ml.salary_predictor |   MAE:     $22293.39
+2026-06-17 20:55:38 | INFO     | ml.salary_predictor |   RMSE:    $33191.17
+2026-06-17 20:55:38 | INFO     | ml.salary_predictor |   R2:      0.7547
+2026-06-17 20:55:38 | INFO     | ml.salary_predictor | 5-Fold Cross-Validation Results:
+2026-06-17 20:55:38 | INFO     | ml.salary_predictor |   Fold 1: R2=0.7551  MAE=$22249.90  RMSE=$33164.74
+2026-06-17 20:55:38 | INFO     | ml.salary_predictor |   Fold 2: R2=0.7519  MAE=$21831.16  RMSE=$32862.08
+2026-06-17 20:55:38 | INFO     | ml.salary_predictor |   Fold 3: R2=0.7585  MAE=$21504.00  RMSE=$32464.54
+2026-06-17 20:55:38 | INFO     | ml.salary_predictor |   Fold 4: R2=0.7445  MAE=$22771.11  RMSE=$34537.49
+2026-06-17 20:55:38 | INFO     | ml.salary_predictor |   Fold 5: R2=0.7594  MAE=$21692.35  RMSE=$32101.92
+2026-06-17 20:55:38 | INFO     | ml.salary_predictor |   Mean R2:   0.7539 +/- 0.0054
+2026-06-17 20:55:38 | INFO     | ml.salary_predictor |   Mean MAE:  $22009.70
+2026-06-17 20:55:38 | INFO     | ml.salary_predictor |   Mean RMSE: $33026.16
+2026-06-17 20:55:38 | INFO     | ml.salary_predictor |   Train R2:  0.7869 (overfit gap: 0.0330)
+2026-06-17 20:55:38 | INFO     | ml.salary_predictor | Top 5 features:
+2026-06-17 20:55:38 | INFO     | ml.salary_predictor |   experience_level          : 0.5976
+2026-06-17 20:55:38 | INFO     | ml.salary_predictor |   is_india                  : 0.2636
+2026-06-17 20:55:38 | INFO     | ml.salary_predictor |   skill_count               : 0.0336
+2026-06-17 20:55:38 | INFO     | ml.salary_predictor |   work_mode                 : 0.0254
+2026-06-17 20:55:38 | INFO     | ml.salary_predictor |   has_javascript            : 0.0182
+2026-06-17 20:55:38 | INFO     | ml.salary_predictor | Model saved to C:\Users\ADMIN\OneDrive\Desktop\Sem-VI\Tech Telent Intelligence Platform\ml\models\salary_model.joblib

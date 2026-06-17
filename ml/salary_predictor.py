@@ -117,11 +117,13 @@ def _prepare_training_data() -> tuple:
 
 def train_model() -> dict:
     """
-    Train the salary prediction model and save it.
+    Train the salary prediction model with 5-fold cross-validation.
 
     Returns:
-        dict with evaluation metrics.
+        dict with evaluation metrics including per-fold CV results.
     """
+    from sklearn.model_selection import KFold, cross_validate
+
     logger.info("=" * 60)
     logger.info("Training Salary Prediction Model")
     logger.info("=" * 60)
@@ -129,7 +131,7 @@ def train_model() -> dict:
     # Prepare data
     X, y, feature_names = _prepare_training_data()
 
-    # Train/test split
+    # Train/test split (hold-out set for final evaluation)
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
     )
@@ -147,7 +149,7 @@ def train_model() -> dict:
     model.fit(X_train, y_train)
     logger.info("Model trained successfully")
 
-    # Evaluate
+    # Hold-out test evaluation
     y_pred = model.predict(X_test)
     metrics = {
         "mae": round(mean_absolute_error(y_test, y_pred), 2),
@@ -157,21 +159,59 @@ def train_model() -> dict:
         "test_size": len(X_test),
     }
 
-    # Cross-validation
-    cv_scores = cross_val_score(model, X, y, cv=5, scoring="r2")
-    metrics["cv_r2_mean"] = round(cv_scores.mean(), 4)
-    metrics["cv_r2_std"] = round(cv_scores.std(), 4)
+    # ---------------------------------------------------------------
+    # 5-Fold Cross-Validation (on full dataset)
+    # ---------------------------------------------------------------
+    logger.info("Running 5-fold cross-validation...")
+    kfold = KFold(n_splits=5, shuffle=True, random_state=42)
+
+    cv_results = cross_validate(
+        RandomForestRegressor(
+            n_estimators=100, max_depth=15, min_samples_split=5,
+            min_samples_leaf=2, random_state=42, n_jobs=-1,
+        ),
+        X, y, cv=kfold,
+        scoring=["r2", "neg_mean_absolute_error", "neg_root_mean_squared_error"],
+        return_train_score=True,
+    )
+
+    # Per-fold metrics
+    cv_r2_scores = cv_results["test_r2"].tolist()
+    cv_mae_scores = (-cv_results["test_neg_mean_absolute_error"]).tolist()
+    cv_rmse_scores = (-cv_results["test_neg_root_mean_squared_error"]).tolist()
+    cv_train_r2 = cv_results["train_r2"].tolist()
+
+    metrics["cv_folds"] = 5
+    metrics["cv_r2_scores"] = [round(s, 4) for s in cv_r2_scores]
+    metrics["cv_r2_mean"] = round(np.mean(cv_r2_scores), 4)
+    metrics["cv_r2_std"] = round(np.std(cv_r2_scores), 4)
+    metrics["cv_mae_scores"] = [round(s, 2) for s in cv_mae_scores]
+    metrics["cv_mae_mean"] = round(np.mean(cv_mae_scores), 2)
+    metrics["cv_rmse_scores"] = [round(s, 2) for s in cv_rmse_scores]
+    metrics["cv_rmse_mean"] = round(np.mean(cv_rmse_scores), 2)
+    metrics["cv_train_r2_mean"] = round(np.mean(cv_train_r2), 4)
+    # Overfitting indicator
+    metrics["overfit_gap"] = round(np.mean(cv_train_r2) - np.mean(cv_r2_scores), 4)
 
     # Feature importance
     importance = pd.Series(model.feature_importances_, index=feature_names)
     importance = importance.sort_values(ascending=False)
     metrics["top_features"] = importance.head(10).to_dict()
 
-    logger.info("Evaluation Results:")
+    # Logging
+    logger.info("Hold-out Test Results:")
     logger.info("  MAE:     $%.2f", metrics["mae"])
     logger.info("  RMSE:    $%.2f", metrics["rmse"])
-    logger.info("  R²:      %.4f", metrics["r2"])
-    logger.info("  CV R²:   %.4f ± %.4f", metrics["cv_r2_mean"], metrics["cv_r2_std"])
+    logger.info("  R2:      %.4f", metrics["r2"])
+
+    logger.info("5-Fold Cross-Validation Results:")
+    for i, (r2, mae, rmse) in enumerate(zip(cv_r2_scores, cv_mae_scores, cv_rmse_scores)):
+        logger.info("  Fold %d: R2=%.4f  MAE=$%.2f  RMSE=$%.2f", i + 1, r2, mae, rmse)
+    logger.info("  Mean R2:   %.4f +/- %.4f", metrics["cv_r2_mean"], metrics["cv_r2_std"])
+    logger.info("  Mean MAE:  $%.2f", metrics["cv_mae_mean"])
+    logger.info("  Mean RMSE: $%.2f", metrics["cv_rmse_mean"])
+    logger.info("  Train R2:  %.4f (overfit gap: %.4f)", metrics["cv_train_r2_mean"], metrics["overfit_gap"])
+
     logger.info("Top 5 features:")
     for feat, imp in list(importance.head(5).items()):
         logger.info("  %-25s : %.4f", feat, imp)

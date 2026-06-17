@@ -58,14 +58,17 @@ def load_to_database(validated_records: list) -> dict:
 
         for skill_name, info in skills_dict.items():
             category = info.get("category", "tool")
+            domain = info.get("domain", category)
             result = conn.execute(
                 text("""
-                    INSERT INTO skills (skill_name, skill_category)
-                    VALUES (:name, :category)
-                    ON CONFLICT (skill_name) DO NOTHING
+                    INSERT INTO skills (skill_name, skill_category, skill_domain)
+                    VALUES (:name, :category, :domain)
+                    ON CONFLICT (skill_name) DO UPDATE SET
+                        skill_category = EXCLUDED.skill_category,
+                        skill_domain = EXCLUDED.skill_domain
                     RETURNING skill_id
                 """),
-                {"name": skill_name, "category": category}
+                {"name": skill_name, "category": category, "domain": domain}
             ).fetchone()
 
             if result:

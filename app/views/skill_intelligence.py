@@ -1,5 +1,5 @@
 """
-Skill Intelligence — skill demand analysis, co-occurrence, and salary correlation.
+Skill Intelligence — skill demand analysis, domain taxonomy, co-occurrence, and salary correlation.
 """
 
 import streamlit as st
@@ -10,15 +10,15 @@ from analytics import skill_analytics
 
 
 def render():
-    page_header("Skill Intelligence", "Analyze skill demand, co-occurrence patterns, and salary correlation")
+    page_header("Skill Intelligence", "Analyze skill demand, specializations, and salary correlation")
 
     filters = render_sidebar_filters()
     country = filters["country"]
     source = filters["source_dataset"]
 
     try:
-        tab1, tab2, tab3, tab4 = st.tabs([
-            "Top Skills", "Skill Categories", "Co-occurrence", "Demand vs Salary"
+        tab1, tab2, tab3, tab4, tab5 = st.tabs([
+            "Top Skills", "Skill Domains", "Skill Categories", "Co-occurrence", "Demand vs Salary"
         ])
 
         with tab1:
@@ -33,6 +33,16 @@ def render():
                 empty_state("No skill data available")
 
         with tab2:
+            section_header("Skills by Specialization Domain",
+                           "AI/ML, Gen AI, Data Science, Full-Stack, DevOps, Mobile, and more")
+            domain_df = skill_analytics.get_skills_by_domain(country=country, source_dataset=source)
+            if not domain_df.empty:
+                fig = treemap(domain_df, path=["skill_domain", "skill_name"], values="job_count")
+                st.plotly_chart(fig, use_container_width=True)
+            else:
+                empty_state("No domain data available")
+
+        with tab3:
             section_header("Skills by Category", "Distribution across technology categories")
             cat_df = skill_analytics.get_skills_by_category(country=country, source_dataset=source)
             if not cat_df.empty:
@@ -41,7 +51,7 @@ def render():
             else:
                 empty_state("No category data available")
 
-        with tab3:
+        with tab4:
             section_header("Skill Co-occurrence Matrix",
                            "Skills most commonly required together in job postings")
             top_n = st.slider("Number of skills", 8, 20, 12, key="cooccurrence_n")
@@ -54,7 +64,7 @@ def render():
             else:
                 empty_state("Not enough data for co-occurrence analysis")
 
-        with tab4:
+        with tab5:
             section_header("Skill Demand vs Average Salary",
                            "Top-right quadrant: high demand and high salary")
             scatter_df = skill_analytics.get_skill_demand_vs_salary(

@@ -43,13 +43,14 @@ Streamlit Dashboard (7 interactive pages, 20+ Plotly charts)
 
 ## ✨ Key Features
 
-- **Multi-Source ETL Pipeline** — Ingests 3 Kaggle datasets, harmonizes schemas, cleans, normalizes salaries to USD, extracts skills via 200+ keyword dictionary
+- **Multi-Source ETL Pipeline** — Ingests datasets (Global, India, etc.), harmonizes schemas, cleans, normalizes salaries to USD, extracts skills via 150+ keyword dictionary with domain mapping (e.g., Gen-AI, Data Science).
 - **Normalized PostgreSQL Schema** — 7 tables with foreign keys, indexes, and analytical views
 - **7 Interactive Dashboard Modules** — Executive overview, skill/salary/location/experience intelligence, tech trends, career advisor
-- **20+ Plotly Visualizations** — Bar charts, heatmaps, treemaps, box plots, scatter plots, donut charts
-- **ML Salary Prediction** — Random Forest model with interpretable binary skill features
+- **Enterprise UI Polish** — Clean dark mode aesthetic featuring the 'Inter' font, tabular numerals, and centralized sidebar routing (no emojis or default Streamlit styling).
+- **20+ Plotly Visualizations** — Bar charts, heatmaps, specialized domain treemaps, box plots, scatter plots, donut charts
+- **ML Salary Prediction with 5-Fold CV** — Random Forest model with interpretable binary skill features, validated using 5-Fold Cross Validation with transparent metrics (R², MAE, RMSE) displayed in the UI.
 - **Rule-Based Career Advisor** — Skill gap analysis comparing user profile against market demand
-- **India-Specific Filters** — Toggle to focus on Indian market insights
+- **India-Specific Filters** — Toggle to focus on Indian market insights, backed by fully mapped localized datasets.
 - **Docker Deployment** — One-command setup with Docker Compose
 
 ---
@@ -178,12 +179,12 @@ pytest tests/ -v
 | Module | Visualizations |
 |---|---|
 | Executive Dashboard | KPI cards, bar chart, donut chart, histogram |
-| Skill Intelligence | Top skills, treemap, co-occurrence heatmap, scatter |
+| Skill Intelligence | Top skills, **Domain/Category Treemaps**, co-occurrence heatmap, scatter |
 | Salary Intelligence | Distribution, by skill, by city, box plots |
 | Location Intelligence | Top cities, work mode, skills by city |
 | Experience Intelligence | Level distribution, salary by level, skills by level |
 | Technology Trends | Tech comparison, landscape treemap, full ranking |
-| Career Advisor | Skill gap analysis, salary prediction, matching roles |
+| Career Advisor | Skill gap analysis, salary prediction, **5-Fold CV Validation Table** |
 
 ---
 

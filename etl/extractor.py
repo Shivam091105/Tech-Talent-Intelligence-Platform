@@ -50,10 +50,10 @@ def _read_india_tech_jobs(file_path: Path) -> pd.DataFrame:
     mapped["experience_text"] = df.get("experience_level", df.get("experience", df.get("min_experience", pd.Series(dtype=str))))
     mapped["work_mode"] = df.get("work_mode", df.get("work_type", df.get("work_setting", pd.Series(dtype=str))))
     mapped["employment_type"] = df.get("employment_type", df.get("job_type", pd.Series(dtype=str)))
-    mapped["skills_text"] = df.get("skills", df.get("required_skills", df.get("key_skills", pd.Series(dtype=str))))
-    mapped["salary_raw"] = df.get("salary", df.get("salary_in_lpa", df.get("avg_salary", pd.Series(dtype=str))))
+    mapped["skills_text"] = df.get("skills_required", df.get("skills", df.get("required_skills", df.get("key_skills", pd.Series(dtype=str)))))
+    mapped["salary_raw"] = df.get("salary_lpa", df.get("salary", df.get("salary_in_lpa", df.get("avg_salary", pd.Series(dtype=str)))))
     mapped["salary_currency"] = "INR"
-    mapped["posted_date"] = df.get("posted_date", df.get("date_posted", pd.Series(dtype=str)))
+    mapped["posted_date"] = df.get("date_posted", df.get("posted_date", pd.Series(dtype=str)))
     mapped["source_dataset"] = "india_tech_jobs"
 
     return mapped
@@ -167,9 +167,9 @@ def extract_all(data_dir: Path = None) -> pd.DataFrame:
         try:
             df = reader(csv_path)
             all_dfs.append(df)
-            logger.info("  ✓ %s: %d rows extracted", csv_path.name, len(df))
+            logger.info("  [OK] %s: %d rows extracted", csv_path.name, len(df))
         except Exception as e:
-            logger.error("  ✗ Error reading %s: %s", csv_path.name, e)
+            logger.error("  [FAIL] Error reading %s: %s", csv_path.name, e)
 
     if not all_dfs:
         raise ValueError("No datasets could be read. Check file names and formats.")
