@@ -9,14 +9,14 @@ services:
     container_name: tech_talent_db
     environment:
       POSTGRES_DB: ${DB_NAME:-tech_talent_db}
-      POSTGRES_USER: ${DB_USER:-admin}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-te31204}
     ports:
       - "${DB_PORT:-5432}:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-admin} -d ${DB_NAME:-tech_talent_db}"]
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USER:-postgres} -d ${DB_NAME:-tech_talent_db}" ]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -32,12 +32,12 @@ services:
       db:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgresql://${DB_USER:-admin}:${DB_PASSWORD:-password}@db:5432/${DB_NAME:-tech_talent_db}
+      DATABASE_URL: postgresql://${DB_USER:-postgres}:${DB_PASSWORD:-te31204}@db:5432/${DB_NAME:-tech_talent_db}
       DB_HOST: db
       DB_PORT: 5432
       DB_NAME: ${DB_NAME:-tech_talent_db}
-      DB_USER: ${DB_USER:-admin}
-      DB_PASSWORD: ${DB_PASSWORD:-password}
+      DB_USER: ${DB_USER:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD:-te31204}
       APP_ENV: production
       LOG_LEVEL: INFO
     ports:
@@ -45,10 +45,7 @@ services:
     volumes:
       - ./data/raw:/app/data/raw:ro
     command: >
-      streamlit run app/main.py
-      --server.port=8501
-      --server.address=0.0.0.0
-      --server.headless=true
+      streamlit run app/main.py --server.port=8501 --server.address=0.0.0.0 --server.headless=true
     restart: unless-stopped
 
 volumes:

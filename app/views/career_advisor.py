@@ -1,59 +1,49 @@
 """
-Module 7: Career Advisor — rule-based skill gap analysis + ML salary prediction.
+Career Advisor — rule-based skill gap analysis and salary estimation.
 """
 
 import streamlit as st
-from app.components.metrics_card import section_header, empty_state
+from app.components.metrics_card import page_header, section_header, empty_state
 from app.components.chart_helpers import horizontal_bar
 from app.theme import COLORS
 
 
 def render():
-    st.markdown("## 🧭 Career Advisor")
-    st.caption("Get personalized skill recommendations and salary estimates based on your profile")
+    page_header("Career Advisor", "Skill gap analysis and salary estimates based on your profile")
 
     try:
         from analytics import career_advisor
 
-        # ---------------------------------------------------------------
-        # User Input Form
-        # ---------------------------------------------------------------
-        st.markdown("### 📝 Your Profile")
+        # -----------------------------------------------------------
+        # User Input
+        # -----------------------------------------------------------
+        section_header("Your Profile")
 
         col1, col2 = st.columns(2)
 
         with col1:
-            # Get all skills for the multi-select
             all_skills_df = career_advisor.get_all_skills()
             skill_options = all_skills_df["skill_name"].tolist() if not all_skills_df.empty else []
-
             user_skills = st.multiselect(
-                "Select your current skills",
+                "Current skills",
                 options=skill_options,
                 default=None,
                 placeholder="Start typing to search skills...",
-                help="Select all the technical skills you currently possess",
             )
 
         with col2:
-            experience_level = st.selectbox(
-                "Your experience level",
-                ["Entry", "Mid", "Senior", "Lead"],
-                index=0,
-            )
+            experience_level = st.selectbox("Experience level", ["Entry", "Mid", "Senior", "Lead"])
+            is_india = st.toggle("Targeting Indian market", value=True)
 
-            is_india = st.toggle("🇮🇳 Targeting Indian market", value=True)
-
-        # ---------------------------------------------------------------
-        # Analysis Button
-        # ---------------------------------------------------------------
-        if st.button("🔍 Analyze My Profile", type="primary", use_container_width=True):
+        # -----------------------------------------------------------
+        # Analyze
+        # -----------------------------------------------------------
+        if st.button("Analyze Profile", type="primary", use_container_width=True):
             if not user_skills:
-                st.warning("Please select at least one skill to analyze.")
+                st.warning("Select at least one skill to analyze.")
                 return
 
-            with st.spinner("Analyzing your profile against market data..."):
-                # Run skill gap analysis
+            with st.spinner("Analyzing..."):
                 result = career_advisor.analyze_skill_gap(
                     user_skills=user_skills,
                     experience_level=experience_level,
@@ -65,76 +55,80 @@ def render():
             # -----------------------------------------------------------
             # Market Readiness Score
             # -----------------------------------------------------------
-            st.markdown("### 📊 Market Readiness Score")
+            section_header("Market Readiness")
 
             score = result["match_percentage"]
-            score_color = COLORS["success"] if score >= 70 else (COLORS["warning"] if score >= 40 else COLORS["danger"])
+            if score >= 70:
+                score_color = COLORS["secondary"]
+            elif score >= 40:
+                score_color = COLORS["warning"]
+            else:
+                score_color = COLORS["danger"]
 
             col_score, col_details = st.columns([1, 2])
 
             with col_score:
                 st.markdown(f"""
-                <div class="score-circle" style="border: 4px solid {score_color}; color: {score_color};">
+                <div class="score-ring" style="border: 3px solid {score_color}; color: {score_color};">
                     {score:.0f}%
                 </div>
-                <p style="text-align: center; color: #8892A0; margin-top: 0.5rem;">
+                <p style="text-align: center; color: #64748B; margin-top: 0.5rem; font-size: 0.85rem;">
                     Market Match
                 </p>
                 """, unsafe_allow_html=True)
 
             with col_details:
                 st.markdown(f"""
-                - **Skills you have**: {len(result['matching_skills'])}
-                - **Skills you need**: {len(result['missing_skills'])}
-                - **Experience level**: {experience_level}
+                | Metric | Value |
+                |---|---|
+                | Skills matched | {len(result['matching_skills'])} |
+                | Skills to learn | {len(result['missing_skills'])} |
+                | Experience level | {experience_level} |
                 """)
 
             st.markdown("---")
 
             # -----------------------------------------------------------
-            # Matching Skills
+            # Matching vs Missing Skills
             # -----------------------------------------------------------
-            col_match, col_missing = st.columns(2)
+            col_match, col_gap = st.columns(2)
 
             with col_match:
-                st.markdown("### ✅ Skills You Have (In Demand)")
+                section_header("Skills You Have (In Demand)")
                 if result["matching_skills"]:
                     for skill in result["matching_skills"]:
                         demand = skill.get("job_count", 0)
                         salary = skill.get("avg_salary")
                         salary_str = f" | ${salary:,.0f} avg" if salary else ""
                         st.markdown(
-                            f'<span class="skill-badge match">{skill["skill_name"]}</span>'
-                            f' <small style="color: #8892A0;">{demand} jobs{salary_str}</small>',
+                            f'<span class="skill-tag match">{skill["skill_name"]}</span>'
+                            f' <small style="color: #64748B;">{demand} jobs{salary_str}</small>',
                             unsafe_allow_html=True,
                         )
                 else:
-                    st.info("None of your skills are in the top market demand for this level.")
+                    st.caption("None of your current skills are in the top market demand for this level.")
 
-            # -----------------------------------------------------------
-            # Missing Skills (Recommendations)
-            # -----------------------------------------------------------
-            with col_missing:
-                st.markdown("### ❌ Skills to Learn (Recommended)")
+            with col_gap:
+                section_header("Recommended Skills to Learn")
                 if result["missing_skills"]:
                     for skill in result["missing_skills"][:10]:
                         demand = skill.get("job_count", 0)
                         salary = skill.get("avg_salary")
                         salary_str = f" | ${salary:,.0f} avg" if salary else ""
                         st.markdown(
-                            f'<span class="skill-badge missing">{skill["skill_name"]}</span>'
-                            f' <small style="color: #8892A0;">{demand} jobs{salary_str}</small>',
+                            f'<span class="skill-tag gap">{skill["skill_name"]}</span>'
+                            f' <small style="color: #64748B;">{demand} jobs{salary_str}</small>',
                             unsafe_allow_html=True,
                         )
                 else:
-                    st.success("You have all the top skills! 🎉")
+                    st.success("You have all the top demanded skills for this level.")
 
             st.markdown("---")
 
             # -----------------------------------------------------------
             # Salary Prediction
             # -----------------------------------------------------------
-            st.markdown("### 💰 Salary Estimate")
+            section_header("Salary Estimate")
 
             try:
                 from ml.salary_predictor import predict_salary
@@ -145,18 +139,18 @@ def render():
                     is_india=is_india,
                 )
 
-                col_sal1, col_sal2, col_sal3 = st.columns(3)
-                with col_sal1:
+                col1, col2, col3 = st.columns(3)
+                with col1:
                     st.metric("Low Estimate", f"${prediction['salary_low']:,.0f}")
-                with col_sal2:
+                with col2:
                     st.metric("Expected Salary", f"${prediction['predicted_salary']:,.0f}")
-                with col_sal3:
+                with col3:
                     st.metric("High Estimate", f"${prediction['salary_high']:,.0f}")
 
-                st.caption(f"Confidence: {prediction['confidence']} | Based on Random Forest model trained on market data")
+                st.caption(f"Confidence: {prediction['confidence']}  |  Random Forest model trained on market data")
 
             except FileNotFoundError:
-                st.info("💡 Salary prediction model not trained yet. Run `python scripts/train_model.py` to enable predictions.")
+                st.info("Salary prediction model not trained yet. Run `python scripts/train_model.py` to enable.")
             except Exception as e:
                 st.warning(f"Could not generate salary prediction: {e}")
 
@@ -164,7 +158,7 @@ def render():
             # Matching Roles
             # -----------------------------------------------------------
             st.markdown("---")
-            st.markdown("### 🎯 Matching Job Roles")
+            section_header("Matching Job Roles")
 
             roles_df = career_advisor.find_matching_roles(user_skills=user_skills)
             if not roles_df.empty:
@@ -175,7 +169,7 @@ def render():
                 fig.update_layout(xaxis_title="Matching Skills Count")
                 st.plotly_chart(fig, use_container_width=True)
             else:
-                st.info("No matching roles found. Try selecting more skills.")
+                st.caption("No matching roles found. Try selecting more skills.")
 
     except Exception as e:
         st.error(f"Error loading career advisor: {e}")

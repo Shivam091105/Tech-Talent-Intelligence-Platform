@@ -1,0 +1,256 @@
+2026-06-16 12:48:41 | INFO     | setup_database | ============================================================
+2026-06-16 12:48:41 | INFO     | setup_database | Tech Talent Intelligence Platform — Database Setup
+2026-06-16 12:48:41 | INFO     | setup_database | ============================================================
+2026-06-16 12:48:42 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-16 12:48:42 | ERROR    | database | Database connection test: FAILED — (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  password authentication failed for user "admin"
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-06-16 12:48:42 | ERROR    | setup_database | Cannot connect to database. Is PostgreSQL running?
+2026-06-16 12:48:42 | ERROR    | setup_database | Start it with: docker-compose up -d db
+2026-06-16 13:46:19 | INFO     | setup_database | ============================================================
+2026-06-16 13:46:19 | INFO     | setup_database | Tech Talent Intelligence Platform — Database Setup
+2026-06-16 13:46:19 | INFO     | setup_database | ============================================================
+2026-06-16 13:46:19 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-16 13:46:19 | ERROR    | database | Database connection test: FAILED — (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  password authentication failed for user "admin"
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-06-16 13:46:19 | ERROR    | setup_database | Cannot connect to database. Is PostgreSQL running?
+2026-06-16 13:46:19 | ERROR    | setup_database | Start it with: docker-compose up -d db
+2026-06-16 13:47:28 | INFO     | setup_database | ============================================================
+2026-06-16 13:47:28 | INFO     | setup_database | Tech Talent Intelligence Platform — Database Setup
+2026-06-16 13:47:28 | INFO     | setup_database | ============================================================
+2026-06-16 13:47:28 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-16 13:47:28 | ERROR    | database | Database connection test: FAILED — (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  password authentication failed for user "admin"
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-06-16 13:47:28 | ERROR    | setup_database | Cannot connect to database. Is PostgreSQL running?
+2026-06-16 13:47:28 | ERROR    | setup_database | Start it with: docker-compose up -d db
+2026-06-16 13:49:07 | INFO     | setup_database | ============================================================
+2026-06-16 13:49:07 | INFO     | setup_database | Tech Talent Intelligence Platform — Database Setup
+2026-06-16 13:49:07 | INFO     | setup_database | ============================================================
+2026-06-16 13:49:07 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-16 13:49:07 | ERROR    | database | Database connection test: FAILED — (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "tech_talent_db" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-06-16 13:49:07 | ERROR    | setup_database | Cannot connect to database. Is PostgreSQL running?
+2026-06-16 13:49:07 | ERROR    | setup_database | Start it with: docker-compose up -d db
+2026-06-16 13:49:45 | INFO     | setup_database | ============================================================
+2026-06-16 13:49:45 | INFO     | setup_database | Tech Talent Intelligence Platform — Database Setup
+2026-06-16 13:49:45 | INFO     | setup_database | ============================================================
+2026-06-16 13:49:45 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-16 13:49:45 | ERROR    | database | Database connection test: FAILED — (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "tech_talent_db" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-06-16 13:49:45 | ERROR    | setup_database | Cannot connect to database. Is PostgreSQL running?
+2026-06-16 13:49:45 | ERROR    | setup_database | Start it with: docker-compose up -d db
+2026-06-16 13:51:11 | INFO     | setup_database | ============================================================
+2026-06-16 13:51:11 | INFO     | setup_database | Tech Talent Intelligence Platform — Database Setup
+2026-06-16 13:51:11 | INFO     | setup_database | ============================================================
+2026-06-16 13:51:12 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-16 13:51:12 | ERROR    | database | Database connection test: FAILED — (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "tech_talent_db" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-06-16 13:51:12 | ERROR    | setup_database | Cannot connect to database. Is PostgreSQL running?
+2026-06-16 13:51:12 | ERROR    | setup_database | Start it with: docker-compose up -d db
+2026-06-16 13:57:01 | INFO     | setup_database | ============================================================
+2026-06-16 13:57:01 | INFO     | setup_database | Tech Talent Intelligence Platform — Database Setup
+2026-06-16 13:57:01 | INFO     | setup_database | ============================================================
+2026-06-16 13:57:01 | INFO     | setup_database | Step 1: Ensuring database 'tech_talent_db' exists...
+2026-06-16 13:57:01 | INFO     | setup_database | Created database: tech_talent_db
+2026-06-16 13:57:01 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-16 13:57:01 | INFO     | database | Database connection test: SUCCESS
+2026-06-16 13:57:01 | INFO     | setup_database | Step 2: Applying schema (6678 bytes)...
+2026-06-16 13:57:01 | INFO     | setup_database | Schema applied successfully!
+2026-06-16 13:57:01 | INFO     | setup_database | Step 3: Verifying tables...
+2026-06-16 13:57:01 | INFO     | setup_database | Tables in database:
+2026-06-16 13:57:01 | INFO     | setup_database |   ✓ companies
+2026-06-16 13:57:01 | INFO     | setup_database |   ✓ experience_levels
+2026-06-16 13:57:01 | INFO     | setup_database |   ✓ job_skills
+2026-06-16 13:57:01 | INFO     | setup_database |   ✓ jobs
+2026-06-16 13:57:01 | INFO     | setup_database |   ✓ locations
+2026-06-16 13:57:01 | INFO     | setup_database |   ✓ salaries
+2026-06-16 13:57:01 | INFO     | setup_database |   ✓ skills
+2026-06-16 13:57:01 | INFO     | setup_database | Views in database:
+2026-06-16 13:57:01 | INFO     | setup_database |   ✓ v_experience_summary
+2026-06-16 13:57:01 | INFO     | setup_database |   ✓ v_location_hiring
+2026-06-16 13:57:01 | INFO     | setup_database |   ✓ v_skill_demand
+2026-06-16 13:57:01 | INFO     | setup_database | ============================================================
+2026-06-16 13:57:01 | INFO     | setup_database | Database setup complete!
+2026-06-16 13:57:01 | INFO     | setup_database | ============================================================
+2026-06-17 11:40:24 | INFO     | setup_database | ============================================================
+2026-06-17 11:40:24 | INFO     | setup_database | Tech Talent Intelligence Platform — Database Setup
+2026-06-17 11:40:24 | INFO     | setup_database | ============================================================
+2026-06-17 11:40:24 | INFO     | setup_database | Step 1: Ensuring database 'tech_talent_db' exists...
+2026-06-17 11:40:25 | INFO     | setup_database | Database already exists: tech_talent_db
+2026-06-17 11:40:25 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-17 11:40:25 | INFO     | database | Database connection test: SUCCESS
+2026-06-17 11:40:25 | INFO     | setup_database | Step 2: Applying schema (6678 bytes)...
+2026-06-17 11:40:25 | INFO     | setup_database | Schema applied successfully!
+2026-06-17 11:40:25 | INFO     | setup_database | Step 3: Verifying tables...
+2026-06-17 11:40:25 | INFO     | setup_database | Tables in database:
+2026-06-17 11:40:25 | INFO     | setup_database |   [OK] companies
+2026-06-17 11:40:25 | INFO     | setup_database |   [OK] experience_levels
+2026-06-17 11:40:25 | INFO     | setup_database |   [OK] job_skills
+2026-06-17 11:40:25 | INFO     | setup_database |   [OK] jobs
+2026-06-17 11:40:25 | INFO     | setup_database |   [OK] locations
+2026-06-17 11:40:25 | INFO     | setup_database |   [OK] salaries
+2026-06-17 11:40:25 | INFO     | setup_database |   [OK] skills
+2026-06-17 11:40:25 | INFO     | setup_database | Views in database:
+2026-06-17 11:40:25 | INFO     | setup_database |   [OK] v_experience_summary
+2026-06-17 11:40:25 | INFO     | setup_database |   [OK] v_location_hiring
+2026-06-17 11:40:25 | INFO     | setup_database |   [OK] v_skill_demand
+2026-06-17 11:40:25 | INFO     | setup_database | ============================================================
+2026-06-17 11:40:25 | INFO     | setup_database | Database setup complete!
+2026-06-17 11:40:25 | INFO     | setup_database | ============================================================
+2026-06-17 11:41:12 | INFO     | ml.salary_predictor | ============================================================
+2026-06-17 11:41:12 | INFO     | ml.salary_predictor | Training Salary Prediction Model
+2026-06-17 11:41:12 | INFO     | ml.salary_predictor | ============================================================
+2026-06-17 11:41:12 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-17 11:41:33 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 11:41:33 | INFO     | etl.pipeline |   TECH TALENT INTELLIGENCE PLATFORM — ETL PIPELINE
+2026-06-17 11:41:33 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 11:41:33 | INFO     | etl.pipeline | 
+[1/4] EXTRACTING data from CSV files...
+2026-06-17 11:41:33 | INFO     | etl.extractor | Found 3 CSV file(s) in C:\Users\ADMIN\OneDrive\Desktop\Sem-VI\Tech Telent Intelligence Platform\data\raw
+2026-06-17 11:41:33 | INFO     | etl.extractor | Read Global AI Jobs: 15000 rows, columns: ['job_id', 'job_title', 'salary_usd', 'salary_currency', 'experience_level', 'employment_type', 'company_location', 'company_size', 'employee_residence', 'remote_ratio', 'required_skills', 'education_required', 'years_experience', 'industry', 'posting_date', 'application_deadline', 'job_description_length', 'benefits_score', 'company_name']
+2026-06-17 11:41:33 | INFO     | etl.extractor |   ✓ global_ai_jobs.csv: 15000 rows extracted
+2026-06-17 11:41:34 | INFO     | etl.extractor | Read India Tech Jobs: 5000 rows, columns: ['Job_ID', 'Job_Title', 'Company', 'Company_Type', 'Industry', 'City', 'Location_Tier', 'Experience_Level', 'Job_Type', 'Work_Mode', 'Salary_LPA', 'Skills_Required', 'Education_Required', 'Openings', 'Applicants', 'Company_Rating', 'Date_Posted']
+2026-06-17 11:41:34 | INFO     | etl.extractor |   ✓ india_tech_jobs.csv: 5000 rows extracted
+2026-06-17 11:41:34 | WARNING  | etl.extractor | Unknown dataset format: se_salaries.csv — skipping
+2026-06-17 11:41:34 | INFO     | etl.extractor | Combined dataset: 20000 total rows
+2026-06-17 11:41:34 | INFO     | etl.pipeline | 
+[2/4] TRANSFORMING data...
+2026-06-17 11:41:34 | INFO     | etl.transformer | ============================================================
+2026-06-17 11:41:34 | INFO     | etl.transformer | Starting transformation pipeline (20000 rows)
+2026-06-17 11:41:34 | INFO     | etl.transformer | ============================================================
+2026-06-17 11:41:34 | INFO     | etl.transformer | Cleaning: 20000 rows → 9568 rows (10432 removed)
+2026-06-17 11:41:34 | INFO     | etl.transformer | Salary normalization: 5780 valid salary values (out of 9568)
+2026-06-17 11:41:36 | INFO     | etl.transformer | Skill extraction: 19911 total skill matches (avg 2.1 per job)
+2026-06-17 11:41:36 | INFO     | etl.transformer | Location standardization: 37 unique cities, 4 unique countries
+2026-06-17 11:41:36 | INFO     | etl.transformer | Experience categorization: {'Entry': 3101, 'Mid': 2537, 'Senior': 2073, 'Lead': 1857}
+2026-06-17 11:41:36 | INFO     | etl.transformer | ============================================================
+2026-06-17 11:41:36 | INFO     | etl.transformer | Transformation complete: 9568 rows
+2026-06-17 11:41:36 | INFO     | etl.transformer | ============================================================
+2026-06-17 11:41:36 | INFO     | etl.pipeline | 
+[3/4] VALIDATING records...
+2026-06-17 11:41:40 | INFO     | etl.validators | Validation: 9568 valid, 0 errors (out of 9568)
+2026-06-17 11:41:40 | INFO     | etl.pipeline | 
+[4/4] LOADING into PostgreSQL...
+2026-06-17 11:41:40 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-17 11:41:41 | INFO     | etl.loader | Loaded 4 experience levels from database
+2026-06-17 11:41:41 | INFO     | etl.loader | Loaded 107 skills into database
+2026-06-17 11:43:03 | INFO     | etl.loader | ============================================================
+2026-06-17 11:43:03 | INFO     | etl.loader | Database loading complete:
+2026-06-17 11:43:03 | INFO     | etl.loader |   companies       : 69 records
+2026-06-17 11:43:03 | INFO     | etl.loader |   locations       : 37 records
+2026-06-17 11:43:03 | INFO     | etl.loader |   skills          : 107 records
+2026-06-17 11:43:03 | INFO     | etl.loader |   jobs            : 9568 records
+2026-06-17 11:43:03 | INFO     | etl.loader |   salaries        : 5780 records
+2026-06-17 11:43:03 | INFO     | etl.loader |   job_skills      : 19911 records
+2026-06-17 11:43:03 | INFO     | etl.loader | ============================================================
+2026-06-17 11:43:03 | INFO     | etl.pipeline | 
+2026-06-17 11:43:03 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 11:43:03 | INFO     | etl.pipeline |   ETL PIPELINE SUMMARY
+2026-06-17 11:43:03 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 11:43:03 | INFO     | etl.pipeline |   Records extracted:    20000
+2026-06-17 11:43:03 | INFO     | etl.pipeline |   After transformation: 9568
+2026-06-17 11:43:03 | INFO     | etl.pipeline |   Valid records:        9568
+2026-06-17 11:43:03 | INFO     | etl.pipeline |   Jobs loaded:          9568
+2026-06-17 11:43:03 | INFO     | etl.pipeline |   Salaries loaded:      5780
+2026-06-17 11:43:03 | INFO     | etl.pipeline |   Job-skill links:      19911
+2026-06-17 11:43:03 | INFO     | etl.pipeline |   Duration:             89.98 seconds
+2026-06-17 11:43:03 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 11:43:47 | INFO     | ml.salary_predictor | ============================================================
+2026-06-17 11:43:47 | INFO     | ml.salary_predictor | Training Salary Prediction Model
+2026-06-17 11:43:47 | INFO     | ml.salary_predictor | ============================================================
+2026-06-17 11:43:47 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-17 11:43:48 | INFO     | ml.salary_predictor | Prepared 5780 samples with 25 features
+2026-06-17 11:43:48 | INFO     | ml.salary_predictor | Train: 4624 samples, Test: 1156 samples
+2026-06-17 11:43:48 | INFO     | ml.salary_predictor | Model trained successfully
+2026-06-17 11:43:50 | INFO     | ml.salary_predictor | Evaluation Results:
+2026-06-17 11:43:50 | INFO     | ml.salary_predictor |   MAE:     $29312.22
+2026-06-17 11:43:50 | INFO     | ml.salary_predictor |   RMSE:    $40696.93
+2026-06-17 11:43:50 | INFO     | ml.salary_predictor |   R²:      0.5572
+2026-06-17 11:43:50 | INFO     | ml.salary_predictor |   CV R²:   0.5715 ± 0.0136
+2026-06-17 11:43:50 | INFO     | ml.salary_predictor | Top 5 features:
+2026-06-17 11:43:50 | INFO     | ml.salary_predictor |   experience_level          : 0.8160
+2026-06-17 11:43:50 | INFO     | ml.salary_predictor |   skill_count               : 0.0370
+2026-06-17 11:43:50 | INFO     | ml.salary_predictor |   work_mode                 : 0.0188
+2026-06-17 11:43:50 | INFO     | ml.salary_predictor |   has_python                : 0.0167
+2026-06-17 11:43:50 | INFO     | ml.salary_predictor |   has_tensorflow            : 0.0151
+2026-06-17 11:43:50 | INFO     | ml.salary_predictor | Model saved to C:\Users\ADMIN\OneDrive\Desktop\Sem-VI\Tech Telent Intelligence Platform\ml\models\salary_model.joblib
+2026-06-17 11:44:41 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-17 18:17:26 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 18:17:26 | INFO     | etl.pipeline |   TECH TALENT INTELLIGENCE PLATFORM — ETL PIPELINE
+2026-06-17 18:17:26 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 18:17:26 | INFO     | etl.pipeline | 
+[1/4] EXTRACTING data from CSV files...
+2026-06-17 18:17:26 | INFO     | etl.extractor | Found 3 CSV file(s) in C:\Users\ADMIN\OneDrive\Desktop\Sem-VI\Tech Telent Intelligence Platform\data\raw
+2026-06-17 18:17:26 | INFO     | etl.extractor | Read Global AI Jobs: 15000 rows, columns: ['job_id', 'job_title', 'salary_usd', 'salary_currency', 'experience_level', 'employment_type', 'company_location', 'company_size', 'employee_residence', 'remote_ratio', 'required_skills', 'education_required', 'years_experience', 'industry', 'posting_date', 'application_deadline', 'job_description_length', 'benefits_score', 'company_name']
+2026-06-17 18:17:26 | INFO     | etl.extractor |   ✓ global_ai_jobs.csv: 15000 rows extracted
+2026-06-17 18:17:26 | INFO     | etl.extractor | Read India Tech Jobs: 5000 rows, columns: ['Job_ID', 'Job_Title', 'Company', 'Company_Type', 'Industry', 'City', 'Location_Tier', 'Experience_Level', 'Job_Type', 'Work_Mode', 'Salary_LPA', 'Skills_Required', 'Education_Required', 'Openings', 'Applicants', 'Company_Rating', 'Date_Posted']
+2026-06-17 18:17:26 | INFO     | etl.extractor |   ✓ india_tech_jobs.csv: 5000 rows extracted
+2026-06-17 18:17:26 | WARNING  | etl.extractor | Unknown dataset format: se_salaries.csv — skipping
+2026-06-17 18:17:26 | INFO     | etl.extractor | Combined dataset: 20000 total rows
+2026-06-17 18:17:26 | INFO     | etl.pipeline | 
+[2/4] TRANSFORMING data...
+2026-06-17 18:17:26 | INFO     | etl.transformer | ============================================================
+2026-06-17 18:17:26 | INFO     | etl.transformer | Starting transformation pipeline (20000 rows)
+2026-06-17 18:17:26 | INFO     | etl.transformer | ============================================================
+2026-06-17 18:17:26 | INFO     | etl.transformer | Cleaning: 20000 rows → 9568 rows (10432 removed)
+2026-06-17 18:17:26 | INFO     | etl.transformer | Salary normalization: 5780 valid salary values (out of 9568)
+2026-06-17 18:17:27 | INFO     | etl.transformer | Skill extraction: 19911 total skill matches (avg 2.1 per job)
+2026-06-17 18:17:27 | INFO     | etl.transformer | Location standardization: 37 unique cities, 4 unique countries
+2026-06-17 18:17:27 | INFO     | etl.transformer | Experience categorization: {'Entry': 3101, 'Mid': 2537, 'Senior': 2073, 'Lead': 1857}
+2026-06-17 18:17:27 | INFO     | etl.transformer | ============================================================
+2026-06-17 18:17:27 | INFO     | etl.transformer | Transformation complete: 9568 rows
+2026-06-17 18:17:27 | INFO     | etl.transformer | ============================================================
+2026-06-17 18:17:27 | INFO     | etl.pipeline | 
+[3/4] VALIDATING records...
+2026-06-17 18:17:28 | INFO     | etl.validators | Validation: 9568 valid, 0 errors (out of 9568)
+2026-06-17 18:17:28 | INFO     | etl.pipeline | 
+[4/4] LOADING into PostgreSQL...
+2026-06-17 18:17:28 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-17 18:17:28 | INFO     | etl.loader | Loaded 4 experience levels from database
+2026-06-17 18:17:28 | INFO     | etl.loader | Loaded 0 skills into database
+2026-06-17 18:18:04 | INFO     | etl.loader | ============================================================
+2026-06-17 18:18:04 | INFO     | etl.loader | Database loading complete:
+2026-06-17 18:18:04 | INFO     | etl.loader |   companies       : 69 records
+2026-06-17 18:18:04 | INFO     | etl.loader |   locations       : 37 records
+2026-06-17 18:18:04 | INFO     | etl.loader |   skills          : 0 records
+2026-06-17 18:18:04 | INFO     | etl.loader |   jobs            : 9568 records
+2026-06-17 18:18:04 | INFO     | etl.loader |   salaries        : 5780 records
+2026-06-17 18:18:04 | INFO     | etl.loader |   job_skills      : 19911 records
+2026-06-17 18:18:04 | INFO     | etl.loader | ============================================================
+2026-06-17 18:18:04 | INFO     | etl.pipeline | 
+2026-06-17 18:18:04 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 18:18:04 | INFO     | etl.pipeline |   ETL PIPELINE SUMMARY
+2026-06-17 18:18:04 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 18:18:04 | INFO     | etl.pipeline |   Records extracted:    20000
+2026-06-17 18:18:04 | INFO     | etl.pipeline |   After transformation: 9568
+2026-06-17 18:18:04 | INFO     | etl.pipeline |   Valid records:        9568
+2026-06-17 18:18:04 | INFO     | etl.pipeline |   Jobs loaded:          9568
+2026-06-17 18:18:04 | INFO     | etl.pipeline |   Salaries loaded:      5780
+2026-06-17 18:18:04 | INFO     | etl.pipeline |   Job-skill links:      19911
+2026-06-17 18:18:04 | INFO     | etl.pipeline |   Duration:             37.87 seconds
+2026-06-17 18:18:04 | INFO     | etl.pipeline | ======================================================================
+2026-06-17 18:18:18 | INFO     | ml.salary_predictor | ============================================================
+2026-06-17 18:18:18 | INFO     | ml.salary_predictor | Training Salary Prediction Model
+2026-06-17 18:18:18 | INFO     | ml.salary_predictor | ============================================================
+2026-06-17 18:18:18 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
+2026-06-17 18:18:19 | INFO     | ml.salary_predictor | Prepared 11560 samples with 25 features
+2026-06-17 18:18:19 | INFO     | ml.salary_predictor | Train: 9248 samples, Test: 2312 samples
+2026-06-17 18:18:19 | INFO     | ml.salary_predictor | Model trained successfully
+2026-06-17 18:18:21 | INFO     | ml.salary_predictor | Evaluation Results:
+2026-06-17 18:18:21 | INFO     | ml.salary_predictor |   MAE:     $26438.84
+2026-06-17 18:18:21 | INFO     | ml.salary_predictor |   RMSE:    $36407.93
+2026-06-17 18:18:21 | INFO     | ml.salary_predictor |   R²:      0.6409
+2026-06-17 18:18:21 | INFO     | ml.salary_predictor |   CV R²:   0.6687 ± 0.0070
+2026-06-17 18:18:21 | INFO     | ml.salary_predictor | Top 5 features:
+2026-06-17 18:18:21 | INFO     | ml.salary_predictor |   experience_level          : 0.8067
+2026-06-17 18:18:21 | INFO     | ml.salary_predictor |   skill_count               : 0.0402
+2026-06-17 18:18:21 | INFO     | ml.salary_predictor |   work_mode                 : 0.0190
+2026-06-17 18:18:21 | INFO     | ml.salary_predictor |   has_python                : 0.0175
+2026-06-17 18:18:21 | INFO     | ml.salary_predictor |   has_kubernetes            : 0.0165
+2026-06-17 18:18:21 | INFO     | ml.salary_predictor | Model saved to C:\Users\ADMIN\OneDrive\Desktop\Sem-VI\Tech Telent Intelligence Platform\ml\models\salary_model.joblib
+2026-06-17 18:18:32 | INFO     | database | Database engine created for localhost:5432/tech_talent_db
