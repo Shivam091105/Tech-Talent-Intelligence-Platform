@@ -581,6 +581,61 @@ def get_matching_roles(skill_names: list, limit: int = 10):
     return execute_query_df(query, {"limit": limit})
 
 
+def get_co_occurring_skills(skill_names: list, level_name: str, limit: int = 10):
+    """
+    Find skills that most frequently appear alongside the user's skills
+    in job postings at the given experience level.
+
+    Strategy:
+      1. Find all jobs (at the given level) that require AT LEAST ONE of
+         the user's skills.
+      2. Among those jobs, count how many require each OTHER skill the
+         user doesn't already have.
+      3. Rank by co-occurrence count first, then by overall job demand.
+
+    This produces genuinely contextual recommendations — e.g. a Python
+    user sees pandas/scikit-learn/SQL, not random unrelated skills.
+    """
+    if not skill_names:
+        return execute_query_df("SELECT 1 WHERE false")
+
+    skill_list = ", ".join(f"'{s.lower()}'" for s in skill_names)
+    query = f"""
+        WITH user_jobs AS (
+            -- Jobs at the right experience level that require any of the user's skills
+            SELECT DISTINCT j.job_id
+            FROM jobs j
+            JOIN job_skills js  ON j.job_id  = js.job_id
+            JOIN skills    sk   ON js.skill_id = sk.skill_id
+            JOIN experience_levels el ON j.experience_level_id = el.level_id
+            WHERE LOWER(sk.skill_name) IN ({skill_list})
+              AND el.level_name = :level_name
+        )
+        SELECT
+            sk2.skill_name,
+            sk2.skill_category,
+            COUNT(DISTINCT js2.job_id)                          AS co_occurrence_count,
+            COUNT(DISTINCT js2.job_id) * 1.0 /
+                NULLIF((SELECT COUNT(*) FROM user_jobs), 0)     AS co_occurrence_rate,
+            ROUND(AVG(sal.avg_salary_usd)::numeric, 2)         AS avg_salary,
+            -- overall market demand for this skill (all levels)
+            (
+                SELECT COUNT(DISTINCT js3.job_id)
+                FROM job_skills js3
+                WHERE js3.skill_id = sk2.skill_id
+            )                                                   AS job_count
+        FROM user_jobs uj
+        JOIN job_skills js2 ON uj.job_id    = js2.job_id
+        JOIN skills    sk2  ON js2.skill_id  = sk2.skill_id
+        LEFT JOIN salaries sal ON uj.job_id = sal.job_id
+        WHERE LOWER(sk2.skill_name) NOT IN ({skill_list})
+        GROUP BY sk2.skill_name, sk2.skill_category, sk2.skill_id
+        ORDER BY co_occurrence_count DESC, job_count DESC
+        LIMIT :limit
+    """
+    return execute_query_df(query, {"level_name": level_name, "limit": limit})
+
+
 # ===========================================================================
 # Utility Queries
 # ===========================================================================

@@ -111,13 +111,20 @@ def render():
             with col_gap:
                 section_header("Recommended Skills to Learn")
                 if result["missing_skills"]:
-                    for skill in result["missing_skills"][:10]:
+                    for skill in result["missing_skills"]:
                         demand = skill.get("job_count", 0)
                         salary = skill.get("avg_salary")
+                        co_count = skill.get("co_occurrence_count")
                         salary_str = f" | ${salary:,.0f} avg" if salary else ""
+                        # Show co-occurrence hint when available (contextual path)
+                        context_str = (
+                            f" | in {co_count} jobs with your skills"
+                            if co_count is not None
+                            else ""
+                        )
                         st.markdown(
                             f'<span class="skill-tag gap">{skill["skill_name"]}</span>'
-                            f' <small style="color: #64748B;">{demand} jobs{salary_str}</small>',
+                            f' <small style="color: #64748B;">{demand} jobs{salary_str}{context_str}</small>',
                             unsafe_allow_html=True,
                         )
                 else:

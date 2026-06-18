@@ -65,7 +65,7 @@ CUSTOM_CSS = """
 
     /* ---- Main content area ---- */
     .block-container {
-        padding: 1.5rem 2rem 2rem 2rem !important;
+        padding: 4rem 2rem 2rem 2rem !important;
         max-width: 1440px;
     }
 
