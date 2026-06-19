@@ -6,7 +6,7 @@
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=flat-square&logo=docker&logoColor=white)](https://docker.com)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
-An end-to-end analytics platform that processes **22,000+ tech job postings** from multiple data sources and generates actionable intelligence about skill demand, salary trends, hiring patterns, and career recommendations.
+An end-to-end analytics platform that processes **20,000+ tech job postings** from multiple data sources and generates actionable intelligence about skill demand, salary trends, hiring patterns, and career recommendations.
 
 > Built as a production-grade portfolio project showcasing Data Engineering, SQL, Machine Learning, and Software Engineering skills.
 
